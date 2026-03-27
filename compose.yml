@@ -4,6 +4,8 @@ services:
     container_name: windows
     environment:
       VERSION: "tiny10"
+      RAM_SIZE: "16G"       # Nên thêm dòng này để giới hạn RAM, tránh đơ máy thật
+      CPU_CORES: "2"       # Giới hạn 2 nhân CPU
     devices:
       - /dev/kvm
       - /dev/net/tun
@@ -15,5 +17,6 @@ services:
       - 3389:3389/udp
     volumes:
       - ./windows:/storage
+      - ./oem:/oem         # DÒNG QUAN TRỌNG NHẤT: Mount thư mục tự động hóa
     restart: always
     stop_grace_period: 2m
